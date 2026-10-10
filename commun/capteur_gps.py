@@ -2,8 +2,11 @@
 capteur_gps.py
 ==============
 
-Récepteur GPS (GNSS) à liaison série NMEA pour le capteur C1, en MicroPython
-sur Raspberry Pi Pico 2 W. Utilisé en option par mode_rugby.py.
+Récepteur GPS (GNSS) à liaison série NMEA, en MicroPython sur Raspberry Pi
+Pico 2 W. Module COMMUN aux deux Pico :
+    - capteur C1 : utilisé en option par deplacement.py (modes foot et rugby) ;
+    - base C0    : repère fixe pour le GPS relatif (c0_base/gps_relatif.py).
+Même câblage sur les deux Pico (voir plus bas).
 
 Modèle actuel : GY-NEO6MV2 (puce u-blox NEO-6M)
     - liaison série 9600 bauds, 1 position par seconde par défaut

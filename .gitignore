@@ -13,9 +13,13 @@ calib_bno055.bin
 modele_foot.json
 modele_rugby.json
 
-# --- Pilote tiers, récupéré séparément (voir README)
-pico/bno055.py
-pico/bno055_base.py
+# --- Base C0 : fichiers produits sur le Pico de la base
+reception_*.csv
+
+# --- Pilotes tiers, récupérés séparément (voir README)
+c1_capteur/bno055.py
+c1_capteur/bno055_base.py
+c0_base/ssd1306.py
 
 # --- Python
 __pycache__/
