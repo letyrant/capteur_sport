@@ -205,7 +205,7 @@ c0_base/     Pico C0, base fixe en bord de terrain (à copier avec commun/)
   reception.py        données reçues de C1 — liaison À FAIRE (emplacement réservé)
 commun/      modules utilisés par les deux Pico
   capteur_gps.py      accès au GPS : NMEA générique, qualité, position locale
-docs/        cahier des charges, documentation, plan de tests
+docs/        cahier des charges
 outils/      scripts exécutés sur le PC, pas sur le Pico
 ```
 
@@ -235,10 +235,6 @@ python outils/convertir_journal.py frappes_0007.bin
 
 ## Documentation
 
-- [`docs/Documentation_capteur.pdf`](docs/Documentation_capteur.pdf) — architecture,
-  principes de mesure, référence des fonctions, paramètres, limites, dépannage.
-- [`docs/Plan_de_tests_capteur.pdf`](docs/Plan_de_tests_capteur.pdf) — 9 niveaux de
-  tests, du câblage à la validation du cahier des charges.
 - [`docs/cahier_des_charges.txt`](docs/cahier_des_charges.txt) — analyse
   fonctionnelle et définitions chiffrées des indicateurs.
 
