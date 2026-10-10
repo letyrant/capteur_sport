@@ -1,0 +1,32 @@
+# --- Données produites par le capteur (à récupérer du Pico, pas à versionner)
+seance_*.json
+etat_*.csv
+frappes_*.bin
+frappes_*.csv
+compteur_seances.json
+erreur.txt
+essai.csv
+calib_bno055.bin
+
+# Modèles étalonnés : propres à un joueur et à une fixation.
+# Retirer ces deux lignes si vous souhaitez archiver un étalonnage de référence.
+modele_foot.json
+modele_rugby.json
+
+# --- Pilote tiers, récupéré séparément (voir README)
+pico/bno055.py
+pico/bno055_base.py
+
+# --- Python
+__pycache__/
+*.py[cod]
+*.mpy
+.venv/
+venv/
+
+# --- Éditeurs et systèmes
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

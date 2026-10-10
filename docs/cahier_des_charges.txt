@@ -1,0 +1,129 @@
+1. Analyse fonctionnelle
+=======================================
+
+A qui rend-il service ?
+  Joueur, entraineur, preparateur physique
+
+Sur quoi agit-il ?
+  La frappe (jambe) et le deplacement du joueur sur le terrain
+
+Dans quel but ?
+  Quantifier la frappe (vitesse, intensite) et le deplacement (position, vitesse, distance)
+
+
+2. FONCTIONS DE SERVICE
+=======================
+
+C0 : base fixe
+--------------
+
+Ref.  | Fonction                                  | Critere
+------+-------------------------------------------+-----------------------------
+FP3   | Fournir un repere fixe (bord de terrain)  | Position de reference connue
+FP4   | Restituer les donnees                     | Format, acces
+FP5   | Afficher les donnees en temps reel sur C0 | Affichage
+FC2   | Autonomie                                 | Brancher sur secteur
+FC3   | Resister aux intemperies                  | Protection
+FC4   | Fonctionner en exterieur                  |
+
+
+C1 : capteur (porte par le joueur)
+----------------------------------
+
+Ref.  | Fonction                                          | Critere
+------+---------------------------------------------------+--------------------------------------------
+FP1   | Mesurer le mouvement de la jambe pendant une      | Plage d'acceleration, frequence
+      | frappe                                            | d'echantillonnage
+FP2   | Mesurer position et vitesse du joueur             | Precision position, vitesse, accelaration
+FC1   | Ne pas gener l'athlete                            | Masse, taille, fixation
+FC2   | Autonomie                                         | Duree 20h
+FC3   | Resister aux chocs, a la sueur et aux intemperies | Protection
+FC    | Fonctionner en exterieur                          |
+
+
+PERFORMANCE POUR LE FOOT A MESURER
+==================================
+
+Tirs
+  Nombre de frappes enregistrees, y compris les tirs, centres et degagements.
+
+Tir max
+  Vitesse de ta frappe la plus puissante, en km/h.
+
+Distance
+  Distance totale parcourue, en kilometres.
+
+Activite
+  Pourcentage du temps detecte en course par rapport au temps d'activite total.
+
+Sprint max
+  Vitesse la plus elevee mesuree lors d'un sprint.
+
+Course
+  Temps total passe a courir, donne en minutes et secondes.
+
+Sprints
+  Nombre de courses au cours desquelles tu as accelere jusqu'a une vitesse
+  superieure d'au moins 30 % a ta vitesse moyenne EN COURSE (voir la section
+  DEFINITIONS CHIFFREES).
+
+Accelerations
+  Nombre de fois ou tu as accelere.
+
+Decelerations
+  Nombre de fois ou tu as ralenti.
+
+
+DEFINITIONS CHIFFREES DES INDICATEURS
+=====================================
+
+Les enonces ci-dessus laissaient plusieurs seuils implicites. Les valeurs
+suivantes sont celles effectivement implantees (deplacement.IndicateursSeance).
+
+Indicateur       | Definition retenue                      | Parametre (defaut)
+-----------------+-----------------------------------------+------------------------
+En course        | vitesse >= 7 km/h                       | seuil_course_kmh
+Activite         | temps en course / duree totale x 100    | --
+Une "course"     | periode continue en course, >= 1 s      | duree_min_course_s
+Sprints          | courses dont la vitesse max >= 1,3 x la | facteur_sprint (1,3)
+                 | vitesse moyenne EN COURSE               | reference_sprint
+Accelerations    | derivee de la vitesse sur 0,5 s         | seuil_acceleration_ms2
+                 | >= +2 m/s2, un comptage par passage     | fenetre_acceleration_s
+Decelerations    | idem avec <= -2 m/s2                    | idem
+
+Choix de la reference des sprints
+---------------------------------
+"ta vitesse moyenne" admettait deux lectures. Mesure sur une sequence de
+5 min d'arret, 2 min de trot a 10,8 km/h et 6 s de sprint :
+
+  reference = moyenne en course   -> seuil 14,9 km/h
+  reference = moyenne de seance   -> seuil  3,9 km/h
+
+La moyenne de seance inclut les arrets, tres nombreux en sport collectif :
+elle abaisse le seuil au point de compter un trot comme un sprint. La
+reference retenue est donc la VITESSE MOYENNE EN COURSE. Le resume de chaque
+seance rappelle la reference utilisee (champ "reference_sprint") et le seuil
+applique (champ "seuil_sprint_kmh").
+
+
+Vitesse pieds lors de fin de la frappe : 60km
+
+
+FACTEUR DIMENSIONNANT
+=====================
+
+frequence :
+  - d'echantillonage du capteur
+  - de communication
+
+10h de vie batterie
+
+
+COMPOSANTS
+==========
+
+Composant                                     | Prix approximatif
+----------------------------------------------+------------------
+Raspberry Pi Pico 2 W                         | ~8 EUR
+Accelerometre/IMU BNO055 (breakout Adafruit)  | ~35 $
+GPS GY-NEO6MV2 (u-blox NEO-6M)                | ~5 EUR
